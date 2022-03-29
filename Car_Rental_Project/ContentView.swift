@@ -30,7 +30,7 @@ struct ContentView: View {
             Image("main.icon").resizable().padding()
             
             NavigationLink(
-                destination: exampleView(),
+                destination: RentView(),
                 label: {
                     Text("Wypożycz auto")
                         .foregroundColor(Color.black)
@@ -44,7 +44,7 @@ struct ContentView: View {
             ).padding(10)
             
             NavigationLink(
-                destination: exampleView(),
+                destination: AddCarrView(),
                 label: {
                     Text("Oddaj auto")
                         .foregroundColor(Color.black)
