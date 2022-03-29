@@ -30,43 +30,27 @@ struct ContentView: View {
             Image("main.icon").resizable().padding()
             
             NavigationLink(
-                destination: RentView(),
+                destination: RentView().navigationBarBackButtonHidden(true),
+                
                 label: {
-                    Text("Wypożycz auto")
-                        .foregroundColor(Color.black)
-                        .frame(width: 180,height: 60,alignment: .center)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .font(.system(size: 20,weight: .bold))
+                    labelMaker(content: "Wypożycz auto")
+                }
+                
+            ).padding(10)
+            
+            NavigationLink(
+                destination: ReturnView().navigationBarBackButtonHidden(true),
+                label: {
+                    labelMaker(content: "Oddaj auto")
                         
                 }
                 
             ).padding(10)
             
             NavigationLink(
-                destination: AddCarrView(),
+                destination: AddCarrView().navigationBarBackButtonHidden(true),
                 label: {
-                    Text("Oddaj auto")
-                        .foregroundColor(Color.black)
-                        .frame(width: 180,height: 60)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .font(.system(size: 20,weight: .bold))
-                        
-                }
-                
-            ).padding(10)
-            
-            NavigationLink(
-                destination: exampleView(),
-                label: {
-                    Text("Dodaj auto")
-                        .foregroundColor(Color.black)
-                        .frame(width: 180,height: 60)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .font(.system(size: 20,weight: .bold))
-                        
+                    labelMaker(content: "Dodaj auto")
                 }
                 
             ).padding(10)
@@ -76,6 +60,7 @@ struct ContentView: View {
             }
         }
     }
+    
 
     private func addItem() {
         withAnimation {
@@ -105,7 +90,17 @@ struct ContentView: View {
             }
         }
     }
+    
+    func labelMaker(content: String) -> some View {
+       return Text(content)
+            .foregroundColor(Color.black)
+            .frame(width: 180,height: 60)
+            .background(Color.white)
+            .cornerRadius(10)
+            .font(.system(size: 20,weight: .bold))
+    }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
