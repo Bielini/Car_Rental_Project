@@ -12,24 +12,80 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Car.id, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Car>
+    private var cars: FetchedResults<Car>
 
     var body: some View {
         
+        
+        NavigationView{
+            ZStack{
+            LinearGradient(gradient: Gradient(colors: [Color.red,Color.blue]),
+                           startPoint: .topLeading,
+                           endPoint: .bottomTrailing)
+            .ignoresSafeArea(.all,edges: .all)
+                
+        VStack{
+            Image("main.icon").resizable().padding()
+            
+            NavigationLink(
+                destination: exampleView(),
+                label: {
+                    Text("Wypożycz auto")
+                        .foregroundColor(Color.black)
+                        .frame(width: 180,height: 60,alignment: .center)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .font(.system(size: 20,weight: .bold))
+                        
+                }
+                
+            ).padding(10)
+            
+            NavigationLink(
+                destination: exampleView(),
+                label: {
+                    Text("Oddaj auto")
+                        .foregroundColor(Color.black)
+                        .frame(width: 180,height: 60)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .font(.system(size: 20,weight: .bold))
+                        
+                }
+                
+            ).padding(10)
+            
+            NavigationLink(
+                destination: exampleView(),
+                label: {
+                    Text("Dodaj auto")
+                        .foregroundColor(Color.black)
+                        .frame(width: 180,height: 60)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .font(.system(size: 20,weight: .bold))
+                        
+                }
+                
+            ).padding(10)
+            
+            
+                }
+            }
+        }
     }
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = Car(context: viewContext)
+            newItem.id = 1
 
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
@@ -38,13 +94,12 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { cars[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
@@ -52,15 +107,20 @@ struct ContentView: View {
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        Group {
+            ContentView()
+            
+        }
     }
 }
+struct exampleView: View{
+    var body: some View{
+        Text("wypożyczenie")
+    }
+}
+
+
+
+
