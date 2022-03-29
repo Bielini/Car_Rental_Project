@@ -10,7 +10,7 @@
 		2448BF8C27F32D2100CCA997 /* Car_Rental_ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2448BF8B27F32D2100CCA997 /* Car_Rental_ProjectApp.swift */; };
 		2448BF8E27F32D2100CCA997 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2448BF8D27F32D2100CCA997 /* ContentView.swift */; };
 		2448BF9027F32D2100CCA997 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2448BF8F27F32D2100CCA997 /* Assets.xcassets */; };
-		2448BF9327F32D2100CCA997 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2448BF9227F32D2100CCA997 /* Preview Assets.xcassets */; };
+		2448BF9327F32D2100CCA997 /* Preview Assets.xcassets in §Resources */ = {isa = PBXBuildFile; fileRef = 2448BF9227F32D2100CCA997 /* Preview Assets.xcassets */; };
 		2448BF9527F32D2100CCA997 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2448BF9427F32D2100CCA997 /* Persistence.swift */; };
 		2448BF9827F32D2100CCA997 /* Car_Rental_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2448BF9627F32D2100CCA997 /* Car_Rental_Project.xcdatamodeld */; };
 /* End PBXBuildFile section */
