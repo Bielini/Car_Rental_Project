@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 
 struct AddCarrView: View {
@@ -17,7 +18,7 @@ struct AddCarrView: View {
     @State private var model: String = ""
     @State private var producent: String = ""
     @State private var id: String = ""
-    @State private var mileage: String = ""
+    @State private var mileage = ""
     @State private var seats = 0
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -57,7 +58,12 @@ struct AddCarrView: View {
                 TextField("Model: ", text: $model)
                 TextField("Przebieg: ", text: $mileage)
                     .keyboardType(.decimalPad)
-                
+                    .onReceive(Just(mileage)) { newValue in
+                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                    if filtered != newValue {
+                                        self.mileage = filtered
+                                    }
+                            }
                 Picker("Liczba miejsc: ",selection: $seats) {
                     ForEach(1 ..< 11) {
                         Text("Liczba miejsc: \($0) ")
@@ -144,10 +150,9 @@ struct AddCarrView: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError),\(nsError.userInfo)")
         }
-        print(cars)
+       
         
         model = ""
-        
         producent = ""
         mileage = ""
         id = ""
@@ -174,3 +179,5 @@ struct AddCarrView_Previews: PreviewProvider {
         AddCarrView()
     }
 }
+
+
