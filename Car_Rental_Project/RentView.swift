@@ -27,7 +27,7 @@ struct RentView: View {
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
                 .ignoresSafeArea(.all,edges: .all)
-                Text("RentView")
+                Text("Wypożycz Samochód").fontWeight(.bold).font(.system(size: 25))
                     
             }
             .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .global)

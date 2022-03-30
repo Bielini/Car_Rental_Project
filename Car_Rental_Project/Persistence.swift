@@ -7,14 +7,14 @@
 
 import CoreData
 
-struct Persistence {
+class Persistence: ObservableObject {
     
     static let shared = Persistence()
     
-    let container: NSPersistentContainer
+    let container = NSPersistentContainer(name: "db")
 
     init() {
-        container = NSPersistentContainer(name: "db")
+
         container.loadPersistentStores{ (description, error) in
             if let error = error {
                 fatalError("Error:  \(error.localizedDescription)")
@@ -28,6 +28,7 @@ struct Persistence {
         if context.hasChanges{
             do {
                 try context.save()
+                completion(nil)
             } catch  {
                 completion(error)
             }
@@ -35,7 +36,9 @@ struct Persistence {
     }
     
     func delete(_ object: NSManagedObject, completion: @escaping (Error?) -> () = {_ in}) {
+        
         let context = container.viewContext
+        
         context.delete(object)
         save(completion: completion)
     }

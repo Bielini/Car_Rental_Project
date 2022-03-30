@@ -17,18 +17,14 @@ struct ReturnView: View {
                 Text("Menu główne").foregroundColor(.black)
                 Image("main.icon").resizable().frame(width: 25 , height: 25)
                 
-            })
-              
-            
-            }
+            })}
         
-      
             ZStack{
                 LinearGradient(gradient: Gradient(colors: [Color.red,Color.blue]),
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
                 .ignoresSafeArea(.all,edges: .all)
-                Text("ReturnView")
+                Text("Zwrot Samochodu").fontWeight(.bold).font(.system(size: 25))
                     
             }.gesture(DragGesture(minimumDistance: 10, coordinateSpace: .global)
                 .onEnded { value in
@@ -46,6 +42,7 @@ struct ReturnView: View {
                     }
                 }).hiddenNavigationBarStyle()
         }
+    
     }
 
 
