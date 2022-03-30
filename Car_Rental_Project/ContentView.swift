@@ -58,7 +58,7 @@ struct ContentView: View {
             
                 }
             }
-        }
+        }.hiddenNavigationBarStyle()
     }
     
 
@@ -92,13 +92,19 @@ struct ContentView: View {
     }
     
     func labelMaker(content: String) -> some View {
-       return Text(content)
-            .foregroundColor(Color.black)
-            .frame(width: 180,height: 60)
-            .background(Color.white)
-            .cornerRadius(10)
-            .font(.system(size: 20,weight: .bold))
-    }
+        return Text(content)
+                .foregroundColor(Color.black)
+                .frame(width: 180,height: 60)
+                .background(Color.white)
+                .cornerRadius(10)
+                .font(.system(size: 20,weight: .bold))
+        }
+
+        
+        
+        
+        
+    
 }
 
 
@@ -113,6 +119,19 @@ struct ContentView_Previews: PreviewProvider {
 struct exampleView: View{
     var body: some View{
         Text("wypożyczenie")
+    }
+}
+struct HiddenNavigationBar: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarHidden(true)
+    }
+}
+
+extension View {
+    func hiddenNavigationBarStyle() -> some View {
+        modifier( HiddenNavigationBar() )
     }
 }
 

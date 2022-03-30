@@ -13,11 +13,20 @@ struct RentView: View {
 
     var body: some View {
         if homeisActive {
-            NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), label: {Text("back")})
+            NavigationLink(destination: ContentView(),label: {
+                Text("Menu główne").foregroundColor(.black)
+                Image("main.icon").resizable().frame(width: 25 , height: 25)
+                
+            })
+              
             
             }
         
-            VStack{
+            ZStack{
+                LinearGradient(gradient: Gradient(colors: [Color.red,Color.blue]),
+                               startPoint: .topLeading,
+                               endPoint: .bottomTrailing)
+                .ignoresSafeArea(.all,edges: .all)
                 Text("RentView")
                     
             }
@@ -27,20 +36,17 @@ struct RentView: View {
                     let verticalAmount = value.translation.height as CGFloat
                     
                     if abs(horizontalAmount) > abs(verticalAmount) {
-                        print(horizontalAmount < 0 ? "left swipe" : "right swipe")
-                        if(horizontalAmount<0){
-                            print("1")
+//                        print(horizontalAmount > 0 ? "left swipe" : "right swipe")
+                        
+                        if(horizontalAmount>0){
                             homeisActive.toggle()
-                            
-                            
                         }
                     } else {
-                        print(verticalAmount < 0 ? "up swipe" : "down swipe")
+//                        print(verticalAmount < 0 ? "up swipe" : "down swipe")
                     }
-                })
-                
-            
+                }).hiddenNavigationBarStyle()
         }
+    
     }
     
 
