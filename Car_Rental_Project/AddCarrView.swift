@@ -23,11 +23,11 @@ struct AddCarrView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
-        sortDescriptors:[NSSortDescriptor(keyPath:\Car.model, ascending: true)],
+        sortDescriptors:[NSSortDescriptor(keyPath:\Car.id, ascending: true)],
         animation: .default)
     private var cars: FetchedResults<Car>
     
-    
+ 
   
     
     var body: some View {
@@ -37,6 +37,8 @@ struct AddCarrView: View {
                 Text("Menu główne").foregroundColor(.black)
                 Image("main.icon").resizable().frame(width: 25 , height: 25)
             })}
+        
+        
         
         
         VStack{
@@ -73,9 +75,17 @@ struct AddCarrView: View {
             List{
                 ForEach(cars){ car in
                     
-                    Text("\(car.producent!) \(car.model!). Posiada \(car.seats) miejsc ")
-                }.onDelete(perform: deleteCar)
-            }.listRowBackground(Color.cyan)
+                    NavigationLink(destination: CarProfile(car: car), label: {
+                        Text("\(car.producent!) \(car.model!). Posiada \(car.seats) miejsc ")})
+                    
+                }
+                    .onDelete(perform: deleteCar)
+                    .padding(10)
+                    .listRowBackground( LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
+                                                       startPoint: .topLeading,
+                                                       endPoint: .bottomTrailing)
+                                                                                .ignoresSafeArea(.all,edges: .all))
+            }
         }
         .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onEnded { value in
