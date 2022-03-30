@@ -42,6 +42,7 @@ struct AddCarrView: View {
         
         
         
+        
         VStack{
            
             LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
@@ -71,7 +72,7 @@ struct AddCarrView: View {
                 }
             }
             
-            // Text("\(seats+1)")
+           
             
             Button(action: addCar){
                 Text("\(addButton)")
@@ -124,9 +125,7 @@ struct AddCarrView: View {
             }
         }
     }
-//    private func validateInput(input: String) -> Bool{
-//        return true
-//    }
+
     
     private func addCar(){
         

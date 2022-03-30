@@ -22,31 +22,36 @@ struct RentView: View {
             
             }
         
-            ZStack{
-                LinearGradient(gradient: Gradient(colors: [Color.red,Color.blue]),
+            VStack{
+                LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
-                .ignoresSafeArea(.all,edges: .all)
+                .ignoresSafeArea(.all,edges: .all).frame(height: 80)
                 Text("Wypożycz Samochód").fontWeight(.bold).font(.system(size: 25))
                     
             }
             .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .global)
                 .onEnded { value in
-                    let horizontalAmount = value.translation.width as CGFloat
-                    let verticalAmount = value.translation.height as CGFloat
-                    
-                    if abs(horizontalAmount) > abs(verticalAmount) {
-//                        print(horizontalAmount > 0 ? "left swipe" : "right swipe")
-                        
-                        if(horizontalAmount>0){
-                            homeisActive.toggle()
-                        }
-                    } else {
-//                        print(verticalAmount < 0 ? "up swipe" : "down swipe")
-                    }
+                    swipe(value)
                 }).hiddenNavigationBarStyle()
         }
     
+    private func swipe(_ value: DragGesture.Value) {
+        let horizontalAmount = value.translation.width as CGFloat
+        let verticalAmount = value.translation.height as CGFloat
+        
+        if abs(horizontalAmount) > abs(verticalAmount) {
+            //                        print(horizontalAmount > 0 ? "left swipe" : "right swipe")
+            //                        if(horizontalAmount>0){
+            //                            homeisActive.toggle()
+            //                        }
+        } else {
+            //                        print(verticalAmount < 0 ? "up swipe" : "down swipe")
+            if (verticalAmount>0) {
+                homeisActive.toggle()
+            }
+        }
+    }
     }
     
 
