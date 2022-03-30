@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 
-struct AddCarrView: View {
+struct CarsManageView: View {
     @State var homeisActive = false
     @State var addButton = "Dodaj samochód"
     
@@ -173,9 +173,9 @@ struct AddCarrView: View {
 }
 
 
-struct AddCarrView_Previews: PreviewProvider {
+struct CarsManageView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCarrView()
+        CarsManageView()
     }
 }
 

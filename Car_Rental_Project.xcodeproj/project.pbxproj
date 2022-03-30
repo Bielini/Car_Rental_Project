@@ -15,7 +15,7 @@
 		2448BF9827F32D2100CCA997 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2448BF9627F32D2100CCA997 /* db.xcdatamodeld */; };
 		24719AF327F4B275002F15CD /* CarProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24719AF227F4B275002F15CD /* CarProfile.swift */; };
 		24A5CD7A27F3645600650ADA /* RentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5CD7927F3645600650ADA /* RentView.swift */; };
-		24A5CD7E27F364AC00650ADA /* AddCarrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5CD7D27F364AC00650ADA /* AddCarrView.swift */; };
+		24A5CD7E27F364AC00650ADA /* CarsManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5CD7D27F364AC00650ADA /* CarsManageView.swift */; };
 		24A5CD8027F364B600650ADA /* ReturnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5CD7F27F364B600650ADA /* ReturnView.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +30,7 @@
 		24719AF027F48010002F15CD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		24719AF227F4B275002F15CD /* CarProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarProfile.swift; sourceTree = "<group>"; };
 		24A5CD7927F3645600650ADA /* RentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentView.swift; sourceTree = "<group>"; };
-		24A5CD7D27F364AC00650ADA /* AddCarrView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarrView.swift; sourceTree = "<group>"; };
+		24A5CD7D27F364AC00650ADA /* CarsManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsManageView.swift; sourceTree = "<group>"; };
 		24A5CD7F27F364B600650ADA /* ReturnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,7 +67,7 @@
 			children = (
 				24719AF227F4B275002F15CD /* CarProfile.swift */,
 				24A5CD7927F3645600650ADA /* RentView.swift */,
-				24A5CD7D27F364AC00650ADA /* AddCarrView.swift */,
+				24A5CD7D27F364AC00650ADA /* CarsManageView.swift */,
 				24A5CD7F27F364B600650ADA /* ReturnView.swift */,
 				2448BF8B27F32D2100CCA997 /* Car_Rental_ProjectApp.swift */,
 				2448BF8D27F32D2100CCA997 /* ContentView.swift */,
@@ -169,7 +169,7 @@
 				2448BF9527F32D2100CCA997 /* Persistence.swift in Sources */,
 				24719AF327F4B275002F15CD /* CarProfile.swift in Sources */,
 				24A5CD8027F364B600650ADA /* ReturnView.swift in Sources */,
-				24A5CD7E27F364AC00650ADA /* AddCarrView.swift in Sources */,
+				24A5CD7E27F364AC00650ADA /* CarsManageView.swift in Sources */,
 				2448BF8E27F32D2100CCA997 /* ContentView.swift in Sources */,
 				2448BF8C27F32D2100CCA997 /* Car_Rental_ProjectApp.swift in Sources */,
 				24A5CD7A27F3645600650ADA /* RentView.swift in Sources */,

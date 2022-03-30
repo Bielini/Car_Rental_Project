@@ -48,7 +48,7 @@ struct ContentView: View {
             ).padding(10)
             
             NavigationLink(
-                destination: AddCarrView().navigationBarBackButtonHidden(true),
+                destination: CarsManageView().navigationBarBackButtonHidden(true),
                 label: {
                     labelMaker(content: "Dodaj auto")
                 }
