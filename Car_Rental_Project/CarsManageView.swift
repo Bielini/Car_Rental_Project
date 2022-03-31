@@ -45,11 +45,7 @@ struct CarsManageView: View {
         
         VStack{
            
-            LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
-                           startPoint: .topLeading,
-                           endPoint: .bottomTrailing)
-            .ignoresSafeArea(.all,edges: .all).frame(height: 80)
-            
+            colorsLine()
             Text("Zarządzanie Samochodami").fontWeight(.bold).font(.system(size: 25))
             
             Section {
@@ -83,15 +79,13 @@ struct CarsManageView: View {
                 ForEach(cars){ car in
                     
                     NavigationLink(destination: CarProfile(car: car), label: {
-                        Text("\(car.producent!) \(car.model!). Posiada \(car.seats) miejsc ")})
+                        CarRowView(car: car)})
                     
                 }
                     .onDelete(perform: deleteCar)
-                    .padding(10)
-                    .listRowBackground( LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
-                                                       startPoint: .topLeading,
-                                                       endPoint: .bottomTrailing)
-                                                                                .ignoresSafeArea(.all,edges: .all))
+                    .padding(5)
+                    .listRowBackground(colorsLine())
+                    
             }
         }
         .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
@@ -105,6 +99,14 @@ struct CarsManageView: View {
     
     
     
+    private func colorsLine() -> some View {
+         return LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
+                               startPoint: .topLeading,
+                               endPoint: .bottomTrailing)
+         .ignoresSafeArea(.all,edges: .all).frame(height: 80).cornerRadius(10)
+     }
+    
+    
     
     
     
@@ -115,9 +117,7 @@ struct CarsManageView: View {
         
         if abs(horizontalAmount) > abs(verticalAmount) {
             //                        print(horizontalAmount > 0 ? "left swipe" : "right swipe")
-            //                        if(horizontalAmount>0){
-            //                            homeisActive.toggle()
-            //                        }
+
         } else {
             //                        print(verticalAmount < 0 ? "up swipe" : "down swipe")
             if (verticalAmount>0) {
@@ -140,6 +140,7 @@ struct CarsManageView: View {
         newCar.model = model
         newCar.producent = producent
         newCar.mileage = Int16(mileage) ?? 0
+        
         newCar.seats = Int16(seats+1)
         newCar.isAvailable = true
         
@@ -160,12 +161,18 @@ struct CarsManageView: View {
     }
     
     private func deleteCar(offsets: IndexSet) {withAnimation {
+        
+        let isAvailableCurrent = offsets.map {cars[$0].isAvailable}.last
+        
+        if(isAvailableCurrent!){
         offsets.map { cars[$0] }.forEach(viewContext.delete)
+        
         do {
             try viewContext.save()
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError),\(nsError.userInfo)")
+        }
         }
     }
         
