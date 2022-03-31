@@ -14,6 +14,7 @@ struct CarsManageView: View {
     @State var addButton = "Dodaj samochód"
     
     @State private var isAvailable: String = ""
+    @State private var showingAlert = false
     
     @State private var model: String = ""
     @State private var producent: String = ""
@@ -72,7 +73,8 @@ struct CarsManageView: View {
             
             Button(action: addCar){
                 Text("\(addButton)")
-                
+            }.alert(isPresented: $showingAlert) {
+                Alert(title: Text("Alert"), message: Text("Wypełnij wszystkie pola"), dismissButton: .default(Text("Wróć")))
             }
            
             List{
@@ -129,34 +131,39 @@ struct CarsManageView: View {
     
     private func addCar(){
         
-        
-        let newCar = Car(context: viewContext)
-        if(cars.isEmpty){
-            newCar.id=1
+        if model != "" && producent != "" && mileage != ""  {
+            
+            let newCar = Car(context: viewContext)
+            if(cars.isEmpty){
+                newCar.id=1
+            }else{
+                newCar.id = (cars.last?.id)!+1
+            }
+            
+            newCar.model = model
+            newCar.producent = producent
+            newCar.mileage = Int16(mileage) ?? 0
+            
+            newCar.seats = Int16(seats+1)
+            newCar.isAvailable = true
+            
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError),\(nsError.userInfo)")
+            }
+           
+            model = ""
+            producent = ""
+            mileage = ""
+            id = ""
+            seats = 0
+            showingAlert = false
         }else{
-            newCar.id = (cars.last?.id)!+1
-        }
-        
-        newCar.model = model
-        newCar.producent = producent
-        newCar.mileage = Int16(mileage) ?? 0
-        
-        newCar.seats = Int16(seats+1)
-        newCar.isAvailable = true
-        
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError),\(nsError.userInfo)")
+            showingAlert = true
         }
        
-        
-        model = ""
-        producent = ""
-        mileage = ""
-        id = ""
-        seats = 0
         
     }
     
