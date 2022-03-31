@@ -21,10 +21,7 @@ struct ContentView: View {
         
         NavigationView{
             ZStack{
-            LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
-                           startPoint: .topLeading,
-                           endPoint: .bottomTrailing)
-            .ignoresSafeArea(.all,edges: .all)
+            colorsLine()
                 
         VStack{
             Image("main.icon").resizable().padding()
@@ -61,6 +58,13 @@ struct ContentView: View {
         }.hiddenNavigationBarStyle()
     }
     
+    
+    private func colorsLine() -> some View {
+         return LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
+                               startPoint: .topLeading,
+                               endPoint: .bottomTrailing)
+         .ignoresSafeArea(.all,edges: .all).frame(height: 80).cornerRadius(10)
+     }
 
     private func addItem() {
         withAnimation {
@@ -100,11 +104,6 @@ struct ContentView: View {
                 .font(.system(size: 20,weight: .bold))
         }
 
-        
-        
-        
-        
-    
 }
 
 
