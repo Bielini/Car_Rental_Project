@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241B7AC427F5B3E900CB12CF /* RentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241B7AC327F5B3E900CB12CF /* RentResultView.swift */; };
 		2448BF8C27F32D2100CCA997 /* Car_Rental_ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2448BF8B27F32D2100CCA997 /* Car_Rental_ProjectApp.swift */; };
 		2448BF8E27F32D2100CCA997 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2448BF8D27F32D2100CCA997 /* ContentView.swift */; };
 		2448BF9027F32D2100CCA997 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2448BF8F27F32D2100CCA997 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		241B7AC327F5B3E900CB12CF /* RentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentResultView.swift; sourceTree = "<group>"; };
 		2448BF8827F32D2100CCA997 /* Car_Rental_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Car_Rental_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2448BF8B27F32D2100CCA997 /* Car_Rental_ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car_Rental_ProjectApp.swift; sourceTree = "<group>"; };
 		2448BF8D27F32D2100CCA997 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,12 +67,13 @@
 		2448BF8A27F32D2100CCA997 /* Car_Rental_Project */ = {
 			isa = PBXGroup;
 			children = (
-				24719AF227F4B275002F15CD /* CarProfile.swift */,
-				24A5CD7927F3645600650ADA /* RentView.swift */,
-				24A5CD7D27F364AC00650ADA /* CarsManageView.swift */,
-				24A5CD7F27F364B600650ADA /* ReturnView.swift */,
-				2448BF8B27F32D2100CCA997 /* Car_Rental_ProjectApp.swift */,
 				2448BF8D27F32D2100CCA997 /* ContentView.swift */,
+				24A5CD7927F3645600650ADA /* RentView.swift */,
+				241B7AC327F5B3E900CB12CF /* RentResultView.swift */,
+				24A5CD7F27F364B600650ADA /* ReturnView.swift */,
+				24A5CD7D27F364AC00650ADA /* CarsManageView.swift */,
+				2448BF8B27F32D2100CCA997 /* Car_Rental_ProjectApp.swift */,
+				24719AF227F4B275002F15CD /* CarProfile.swift */,
 				2448BF8F27F32D2100CCA997 /* Assets.xcassets */,
 				2448BF9427F32D2100CCA997 /* Persistence.swift */,
 				2448BF9627F32D2100CCA997 /* db.xcdatamodeld */,
@@ -172,6 +175,7 @@
 				24A5CD7E27F364AC00650ADA /* CarsManageView.swift in Sources */,
 				2448BF8E27F32D2100CCA997 /* ContentView.swift in Sources */,
 				2448BF8C27F32D2100CCA997 /* Car_Rental_ProjectApp.swift in Sources */,
+				241B7AC427F5B3E900CB12CF /* RentResultView.swift in Sources */,
 				24A5CD7A27F3645600650ADA /* RentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -163,8 +163,6 @@ struct CarsManageView: View {
         }else{
             showingAlert = true
         }
-       
-        
     }
     
     private func deleteCar(offsets: IndexSet) {withAnimation {

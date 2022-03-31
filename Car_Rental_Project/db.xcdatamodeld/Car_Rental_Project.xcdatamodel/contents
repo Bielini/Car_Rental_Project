@@ -10,13 +10,12 @@
         <relationship name="toRent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Rent" inverseName="toCar" inverseEntity="Rent"/>
     </entity>
     <entity name="Rent" representedClassName="Rent" syncable="YES" codeGenerationType="class">
-        <attribute name="attribute" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="returnCode" optional="YES" attributeType="String"/>
         <relationship name="toCar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="toRent" inverseEntity="Car"/>
     </entity>
     <elements>
         <element name="Car" positionX="-63" positionY="9" width="128" height="134"/>
-        <element name="Rent" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Rent" positionX="-63" positionY="-18" width="128" height="74"/>
     </elements>
 </model>

@@ -16,8 +16,7 @@ struct RentView: View {
     
     @FetchRequest(
         sortDescriptors:[NSSortDescriptor(keyPath:\Car.id, ascending: true)],
-        animation: .default)
-    private var cars: FetchedResults<Car>
+        animation: .default)private var cars: FetchedResults<Car>
     
  
     
@@ -45,7 +44,7 @@ struct RentView: View {
                     ForEach(cars) { car in
                         
                         if(car.isAvailable){
-                            NavigationLink(destination: CarProfile(car: car), label: {
+                            NavigationLink(destination: RentResultView(car: car), label: {
                                 CarRowView(car: car)})
                         }
                         }.listRowBackground(colorsLine())
