@@ -72,7 +72,7 @@ struct CarsManageView: View {
            
             
             Button(action: addCar){
-                Text("\(addButton)")
+                Text("Dodaj samochód")
             }.alert(isPresented: $showingAlert) {
                 Alert(title: Text("Alert"), message: Text("Wypełnij wszystkie pola"), dismissButton: .default(Text("Wróć")))
             }

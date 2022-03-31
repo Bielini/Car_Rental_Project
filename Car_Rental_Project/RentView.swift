@@ -102,6 +102,7 @@ struct CarRowView: View {
                 Text("Liczba miejsc: \(car.seats)")
                 Text("Przebieg: \(car.mileage)")
                 Text("Aktualny stan: \(availableValidation(isAvailable: car.isAvailable))")
+                
             }
             .foregroundColor(.secondary)
             .font(.subheadline)

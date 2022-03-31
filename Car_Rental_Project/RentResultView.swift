@@ -29,8 +29,7 @@ struct RentResultView: View {
     
     
     
-    
-    
+
     
     var body: some View {
         VStack{
@@ -39,7 +38,7 @@ struct RentResultView: View {
             
             TextField("Email: ", text: $email)
             TextField("Return Code: ", text: $returnCode)
-            Text("\(car.id)")
+            
             
             Button(action: rentCar){
                 Text("Wypożycz")
@@ -48,11 +47,11 @@ struct RentResultView: View {
                 Alert(title: Text("Alert"), message: Text("Wypełnij wszystkie pola"), dismissButton: .default(Text("Wróć")))}
             
             
-            Text("\(rentInfo)")
+            
             }
         }
     
-        
+    
     
     
    
@@ -68,23 +67,17 @@ struct RentResultView: View {
             newRent.toCar = car
             newRent.toCar?.isAvailable = false
             
+            
+            
             do {
                 try viewContext.save()
             } catch {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError),\(nsError.userInfo)")
             }
-           
+ 
             returnCode = ""
             email = ""
-            
-            rentInfo = """
-        Wypożyczono!
-    Email: \(email)
-    Kod Zwrotu: \(rentInfo)
-    Samochod: \(car.producent) \(car.model)
-"""
-           
             showingAlert = false
         }else{
             showingAlert = true
@@ -98,6 +91,25 @@ struct RentResultView: View {
          .ignoresSafeArea(.all,edges: .all).frame(height: 80).cornerRadius(10)
      }
 }
+
+struct RentRowView: View {
+    var rent: Rent
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("\(rent.returnCode!)searae")
+                .foregroundColor(.primary)
+                .font(.headline)
+           
+            }
+            .foregroundColor(.secondary)
+            .font(.subheadline)
+            
+        }
+    }
+    
+   
+    
 
 
 
