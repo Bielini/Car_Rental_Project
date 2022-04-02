@@ -4,8 +4,9 @@
 //
 //  Created by Piotrek Bielawski on 29/03/2022.
 //
-
+import MapKit
 import SwiftUI
+import Combine
 
 struct ReturnView: View {
     @State var homeisActive = false
@@ -13,6 +14,19 @@ struct ReturnView: View {
     @State private var email: String = ""
     @State private var returnCode: String = ""
     @State private var rentInfo: String = ""
+    @State var places =  [Place(coordinate: CLLocationCoordinate2D(
+                 latitude: 51.23572314762387,
+                 longitude: 22.550248826718523))]
+    
+    @State var region : MKCoordinateRegion = MKCoordinateRegion (
+        center: CLLocationCoordinate2D(
+            latitude: 51.23572314762387,
+            longitude: 22.550248826718523),
+        latitudinalMeters: 300,
+        longitudinalMeters: 300)
+    
+    @State var latitude: String = ""
+    @State var longitude: String = ""
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -41,13 +55,51 @@ struct ReturnView: View {
                 TextField("Email: ", text: $email)
                 TextField("Return Code: ", text: $returnCode)
                 
+                Map(coordinateRegion: $region, annotationItems: places){
+                   place in
+                    MapMarker(coordinate: place.coordinate, tint: Color.green)
+               }.frame(width:380, height: 200, alignment: .center)
+               
+               Text("Wspólrzędne lokalizacji:")
+               HStack{
+               TextField("Szerokość -90:90",text: $latitude).keyboardType(.decimalPad)
+                   .onReceive(Just(latitude)) { newValue in
+                                   let filtered = newValue.filter { "0123456789.".contains($0) }
+                                   if filtered != newValue {
+                                       self.latitude = filtered
+                                   }
+                           }
+               TextField("Długość -180:180",text: $longitude).keyboardType(.decimalPad)
+                   .onReceive(Just(longitude)) { newValue in
+                                   let filtered = newValue.filter { "0123456789.".contains($0) }
+                                   if filtered != newValue {
+                                       self.longitude = filtered
+                                   }
+                           }
+               }
+                Button(action: {
+                    if  longitude != "" && latitude != "" {
+                        
+                        self.places = [Place(coordinate: CLLocationCoordinate2D(
+                            latitude: Double(latitude)!,
+                            longitude: Double(longitude)!))]
+                        
+                        self.region = MKCoordinateRegion(
+                            center: CLLocationCoordinate2D(
+                                latitude: Double(latitude)!,
+                                longitude: Double(longitude)!),
+                            latitudinalMeters: 300,
+                            longitudinalMeters: 300)
+                    }
+                }, label: {Text("Zlokalizuj")})
+                
                 Button(action: deleteCar){
                     Text("Zwróć samochód")
                 }.alert(isPresented: $showingAlert) {
                     Alert(title: Text("Alert"), message: Text("Wypełnij wszystkie pola"), dismissButton: .default(Text("Wróć")))
                 }
                 
-                Text("\(rentInfo)")
+                
                     
             }.gesture(DragGesture(minimumDistance: 10, coordinateSpace: .global)
                 .onEnded { value in
@@ -79,13 +131,15 @@ struct ReturnView: View {
         }
     }
     private func deleteCar() {withAnimation {
-        if email != "" && returnCode != ""  {
+        if email != "" && returnCode != "" && longitude != "" && latitude != "" {
             
             rents.forEach { rent in
                 
                 if(rent.returnCode == returnCode){
                     
                     viewContext.delete(rent)
+                    rent.toCar?.longitude = longitude
+                    rent.toCar?.latitude = latitude
                     rent.toCar?.isAvailable = true
                    
                     
@@ -97,7 +151,8 @@ struct ReturnView: View {
                         }
                     }
                 }
-            
+            longitude = ""
+            latitude = ""
             returnCode = ""
             email = ""
             

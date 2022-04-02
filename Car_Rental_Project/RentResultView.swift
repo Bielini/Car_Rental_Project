@@ -4,7 +4,7 @@
 //
 //  Created by Piotrek Bielawski on 31/03/2022.
 //
-
+import MapKit
 import SwiftUI
 
 
@@ -27,6 +27,16 @@ struct RentResultView: View {
     @State private var returnCode: String = ""
     @State private var rentInfo: String = ""
     
+    @State var places =  [Place(coordinate: CLLocationCoordinate2D(
+                 latitude: 51.23572314762387,
+                 longitude: 22.550248826718523))]
+    
+    @State var region : MKCoordinateRegion = MKCoordinateRegion (
+        center: CLLocationCoordinate2D(
+            latitude: 51.23572314762387,
+            longitude: 22.550248826718523),
+        latitudinalMeters: 300,
+        longitudinalMeters: 300)
     
     
 
@@ -39,36 +49,43 @@ struct RentResultView: View {
             TextField("Email: ", text: $email)
             TextField("Return Code: ", text: $returnCode)
             
+            Map(coordinateRegion: $region, annotationItems: places){
+               place in
+                MapMarker(coordinate: place.coordinate, tint: Color.green)
+           }.frame(width:350, height: 280, alignment: .center)
+            Button(action: {
+                self.places = [Place(coordinate: CLLocationCoordinate2D(
+                 latitude: Double(car.latitude!)!,
+                 longitude: Double(car.longitude!)!))]
+                
+                self.region = MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(
+                     latitude: Double(car.latitude!)!,
+                     longitude: Double(car.longitude!)!),
+                    latitudinalMeters: 600,
+                    longitudinalMeters: 600)
+                
+            }, label: {Text("Zlokalizuj")})
             
             Button(action: rentCar){
                 Text("Wypożycz")
             }
             .alert(isPresented: $showingAlert) {
                 Alert(title: Text("Alert"), message: Text("Wypełnij wszystkie pola"), dismissButton: .default(Text("Wróć")))}
-            
-            
-            
             }
         }
-    
-    
-    
-    
-   
+
     private func rentCar(){
         
         if email != "" && returnCode != ""  {
             
             let newRent = Rent(context: viewContext)
-           
-            
+
             newRent.email = email
             newRent.returnCode = returnCode
             newRent.toCar = car
             newRent.toCar?.isAvailable = false
-            
-            
-            
+   
             do {
                 try viewContext.save()
             } catch {
@@ -91,6 +108,7 @@ struct RentResultView: View {
          .ignoresSafeArea(.all,edges: .all).frame(height: 80).cornerRadius(10)
      }
 }
+
 
 struct RentRowView: View {
     var rent: Rent

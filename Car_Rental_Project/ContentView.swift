@@ -20,8 +20,9 @@ struct ContentView: View {
         
         
         NavigationView{
+            
             ZStack{
-            colorsLine()
+                colorsLine()
                 
         VStack{
             Image("main.icon").resizable().padding()
@@ -63,7 +64,7 @@ struct ContentView: View {
          return LinearGradient(gradient: Gradient(colors: [Color.white,Color.red]),
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
-         .ignoresSafeArea(.all,edges: .all).frame(height: 80).cornerRadius(10)
+         .ignoresSafeArea(.all,edges: .all)
      }
 
     private func addItem() {

@@ -7,9 +7,23 @@
 
 import SwiftUI
 import Combine
-
+import MapKit
 
 struct CarsManageView: View {
+    @State var places =  [Place(coordinate: CLLocationCoordinate2D(
+                 latitude: 51.23572314762387,
+                 longitude: 22.550248826718523))]
+    
+    @State var region : MKCoordinateRegion = MKCoordinateRegion (
+        center: CLLocationCoordinate2D(
+            latitude: 51.23572314762387,
+            longitude: 22.550248826718523),
+        latitudinalMeters: 300,
+        longitudinalMeters: 300)
+    
+    @State var latitude: String = ""
+    @State var longitude: String = ""
+    
     @State var homeisActive = false
     @State var addButton = "Dodaj samochód"
     
@@ -21,6 +35,8 @@ struct CarsManageView: View {
     @State private var id: String = ""
     @State private var mileage = ""
     @State private var seats = 0
+    
+    
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -67,6 +83,44 @@ struct CarsManageView: View {
                         Text("Liczba miejsc: \($0) ")
                     }
                 }
+                 Map(coordinateRegion: $region, annotationItems: places){
+                    place in
+                     MapMarker(coordinate: place.coordinate, tint: Color.green)
+                }.frame(width:380, height: 200, alignment: .center)
+                
+                Text("Wspólrzędne lokalizacji:")
+                HStack{
+                TextField("Szerokość -90:90",text: $latitude).keyboardType(.decimalPad)
+                    .onReceive(Just(latitude)) { newValue in
+                                    let filtered = newValue.filter { "0123456789.".contains($0) }
+                                    if filtered != newValue {
+                                        self.latitude = filtered
+                                    }
+                            }
+                TextField("Długość -180:180",text: $longitude).keyboardType(.decimalPad)
+                    .onReceive(Just(longitude)) { newValue in
+                                    let filtered = newValue.filter { "0123456789.".contains($0) }
+                                    if filtered != newValue {
+                                        self.longitude = filtered
+                                    }
+                            }
+                }
+                Button(action: {
+                    if  longitude != "" && latitude != "" {
+                        
+                        self.places = [Place(coordinate: CLLocationCoordinate2D(
+                            latitude: Double(latitude)!,
+                            longitude: Double(longitude)!))]
+                        
+                        self.region = MKCoordinateRegion(
+                            center: CLLocationCoordinate2D(
+                                latitude: Double(latitude)!,
+                                longitude: Double(longitude)!),
+                            latitudinalMeters: 300,
+                            longitudinalMeters: 300)
+                    }
+                    
+                }, label: {Text("Zlokalizuj")})
             }
             
            
@@ -110,6 +164,7 @@ struct CarsManageView: View {
     
     
     
+   
     
     
     
@@ -131,7 +186,7 @@ struct CarsManageView: View {
     
     private func addCar(){
         
-        if model != "" && producent != "" && mileage != ""  {
+        if model != "" && producent != "" && mileage != "" && longitude != "" && latitude != ""  {
             
             let newCar = Car(context: viewContext)
             if(cars.isEmpty){
@@ -143,7 +198,8 @@ struct CarsManageView: View {
             newCar.model = model
             newCar.producent = producent
             newCar.mileage = Int16(mileage) ?? 0
-            
+            newCar.longitude = longitude
+            newCar.latitude = latitude
             newCar.seats = Int16(seats+1)
             newCar.isAvailable = true
             
@@ -180,8 +236,13 @@ struct CarsManageView: View {
         }
         }
     }
-        
+     
     }
+}
+
+struct Place: Identifiable{
+    var id = UUID()
+    var coordinate: CLLocationCoordinate2D
 }
 
 
